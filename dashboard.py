@@ -93,25 +93,42 @@ st.pyplot(fig1)
 st.divider()
 
 
-# Gráfico 2 – Corridas Semanais (Pizza)
+# Gráfico 2 – Corridas Semanais por Engajamento 
 
 st.subheader("Corridas Semanais por Engajamento")
 
-corridas_por_engajamento = df.groupby("nivel_engajamento")["corridas_semana"].sum().reindex(["Alto", "Médio", "Baixo"], fill_value=0)
-
-fig2, ax2 = plt.subplots(figsize=(8, 8))
-ax2.pie(
-    corridas_por_engajamento,
-    labels=corridas_por_engajamento.index,
-    autopct='%1.1f%%',
-    colors=[cores[n] for n in corridas_por_engajamento.index],
-    startangle=90,
-    wedgeprops={'edgecolor': 'black', 'linewidth': 1.5, 'linestyle': 'solid'}
+corridas_por_engajamento = (
+    df.groupby("nivel_engajamento")["corridas_semana"]
+    .sum()
+    .reindex(["Alto", "Médio", "Baixo"], fill_value=0)
 )
-ax2.set_title(" Corridas Semanais por Engajamento", fontsize=16, fontweight='bold')
+
+fig2, ax2 = plt.subplots(figsize=(10, 5))
+
+bars = ax2.bar(
+    corridas_por_engajamento.index,
+    corridas_por_engajamento.values,
+    color=[cores[n] for n in corridas_por_engajamento.index]
+)
+
+# Rótulos em cima das barras
+for bar in bars:
+    ax2.text(
+        bar.get_x() + bar.get_width() / 2,
+        bar.get_height(),
+        f"{int(bar.get_height())}",
+        ha="center",
+        va="bottom",
+        fontsize=11,
+        fontweight="bold"
+    )
+
+ax2.set_xlabel("Nível de Engajamento")
+ax2.set_ylabel("Total de Corridas Semanais")
 
 st.pyplot(fig2)
 st.divider()
+
 
 
 # Gráfico 3 – Média de Corridas
