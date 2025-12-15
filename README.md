@@ -6,7 +6,7 @@ Dashboard interativo para análise do **engajamento de motoristas** da 99, desen
 
 Você pode visualizar o PDF do dashboard clicando no link abaixo:
 
-[Visualizar Dashboard (PDF)](docs/dashboard_demo.pdf)
+[Visualizar Dashboard (PDF)](dashboard_demo.pdf)
 
 
 ## 🎯 Objetivo
